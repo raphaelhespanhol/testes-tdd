@@ -37,6 +37,44 @@ public class UserControllerTest {
                 .andExpect(status().isCreated());
     }
 
+    @Test
+    public void shouldReturnErrorWithoutBody() throws Exception {
+        this.mockMvc.perform(post("/api/users")
+                .content("")
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    public void shouldReturnErrorWithoutName() throws Exception {
+        final UserDTO user = UserDTO.builder().age(36).build();
+
+        this.mockMvc.perform(post("/api/users")
+                .content(asJsonString(user))
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    public void shouldReturnErrorWithoutAge() throws Exception {
+        final UserDTO user = UserDTO.builder().name("Raphael").build();
+
+        this.mockMvc.perform(post("/api/users")
+                .content(asJsonString(user))
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest());
+    }
+
+
+
+
+    //TODO: CRIAR CHAMADA PARA UPDATE --> PUT
+    //TODO: CRIAR CHAMADA PARA DELETE --> DELETE
+    //TODO: CRIAR CHAMADA PARA SELECT --> GET
+
     public static String asJsonString(final Object obj) {
         try {
             return new ObjectMapper().writeValueAsString(obj);
@@ -44,13 +82,4 @@ public class UserControllerTest {
             throw new RuntimeException(e);
         }
     }
-
-    //TODO: CRIAR CHAMADA PARA UPDATE --> PUT
-    //TODO: CRIAR CHAMADA PARA DELETE --> DELETE
-    //TODO: CRIAR CHAMADA PARA SELECT --> GET
-
-
-
-
-
 }

@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 
 @RestController
@@ -13,7 +14,7 @@ import java.net.URI;
 public class UserController {
 
     @PostMapping
-    public ResponseEntity create(@RequestBody UserDTO user){
+    public ResponseEntity create(@Valid @RequestBody UserDTO user){
         return ResponseEntity.created(URI.create("/id?".concat("1"))).body(user);
     }
 
