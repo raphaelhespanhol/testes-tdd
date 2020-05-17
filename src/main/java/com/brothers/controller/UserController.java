@@ -3,13 +3,15 @@ package com.brothers.controller;
 import com.brothers.controller.dto.UserDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.Assert;
+import org.springframework.stereotype.Controller;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.ConstraintViolationException;
 import javax.validation.Valid;
 import java.net.URI;
 
-@RestController
+@Controller
 @RequestMapping("api/users")
 public class UserController {
 
@@ -18,4 +20,13 @@ public class UserController {
         return ResponseEntity.created(URI.create("/id?".concat("1"))).body(user);
     }
 
+    @ExceptionHandler(ConstraintViolationException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    ResponseEntity<String> handleConstraintViolationException(ConstraintViolationException e) {
+        return new ResponseEntity<>("not valid due to validation error: " + e.getMessage(), HttpStatus.BAD_REQUEST);
+    }
 }
+
+
+
+
