@@ -1,10 +1,10 @@
-package com.brothers.testtdd;
+package com.brothers;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class TestTddApplicationTests {
+class ApplicationTests {
 
 	@Test
 	void contextLoads() {

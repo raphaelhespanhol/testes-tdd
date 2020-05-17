@@ -1,13 +1,13 @@
-package com.brothers.testtdd;
+package com.brothers;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class TestTddApplication {
+public class Application {
 
 	public static void main(String[] args) {
-		SpringApplication.run(TestTddApplication.class, args);
+		SpringApplication.run(Application.class, args);
 	}
 
 }
