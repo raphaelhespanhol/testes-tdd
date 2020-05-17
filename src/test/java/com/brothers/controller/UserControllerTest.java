@@ -1,7 +1,7 @@
 package com.brothers.controller;
 
 import com.brothers.Application;
-import com.brothers.entity.User;
+import com.brothers.controller.dto.UserDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,7 +28,7 @@ public class UserControllerTest {
     //TODO: CRIAR CHAMADA PARA INSERT --> POST
     @Test
     public void shouldCreateUser() throws Exception {
-        final User user = User.builder().name("Raphael").age(36).build();
+        final UserDTO user = UserDTO.builder().name("Raphael").age(36).build();
 
         this.mockMvc.perform(post("/api/users")
                 .content(asJsonString(user))
